@@ -22,8 +22,9 @@ jobs:
                 command: yarn test
             - run:
                 name: Run build
-                - store_artifacts:
-                    path: build
+                command: yarn build
+            - store_artifacts:
+                path: build
 
 workflows:
     version: 2

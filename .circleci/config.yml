@@ -5,11 +5,18 @@ jobs:
         docker:
             - image: circleci/node:lts
         working_directory: ~/repo
+        restore_cache:
+            keys:
+                - v1-dependencies-{{ checksum "yarn.lock" }}
         steps:
             - checkout
             - run:
                 name: Install Deps
                 command: yarn
+            -save_cache:
+                paths:
+                    - node_modules
+                key: v1-dependencies-{{ checksum "yarn.lock" }}
             - run:
                 name: Test cases
                 command: yarn test
